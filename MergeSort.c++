@@ -2,26 +2,27 @@
 using namespace std;
 
 void merge(int arr[], int l, int mid, int h){
-    int b[h+1];
-    int i=0;
+    int b[h-l+1];
+    int i=l;
     int j=mid+1;
     int k=0;
 
-    while((i<=l) && (j<=h)){
-        if(arr[i] < arr[j])
+    while((i<=mid) && (j<=h)){
+        if(arr[i] <= arr[j])
             b[k++] = arr[i++];
         else
             b[k++] = arr[j++];
     }
 
-    for(; i<=l; i++)
+    for(; i<=mid; i++)
         b[k++] = arr[i];
 
     for(; j<=h; j++)
         b[k++] = arr[j];
 
-    for(int x=0; x<k; x++)
-        arr[x] = b[k];
+    k=0;
+    for(int x=l; x<=h; x++)
+        arr[x] = b[k++];
 }
 
 
