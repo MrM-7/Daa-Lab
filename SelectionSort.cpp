@@ -1,47 +1,53 @@
 #include<iostream>
 using namespace std;
 
-int minimum(int arr[], int s, int e, int &ctr){
-	int min=s;
-	for(int i=s; i<=e; i++){
-		ctr++;
-		if(arr[i] < arr[min]){
-			min = i;
-		}
-	}
-	return min;
+void swap(int arr[], int i1, int i2){
+    int temp = arr[i1];
+    arr[i1] = arr[i2];
+    arr[i2] = temp;
+}
+
+void selectionSort(int arr[], int n, int &cmp, int &swp){
+
+    for(int i=0; i<n-1; i++){
+        int min = i;
+        for(int j=i+1; j<n; j++){
+            cmp++;
+            if(arr[j] < arr[min])
+                min = j;
+        }
+        if(min != i){
+            swp = swp + 2;
+            swap(arr,min,i);
+        }
+    }
+
+}
+
+void display(int arr[], int n){
+    cout<<"Sorted Array: ";
+    for(int i=0; i<n; i++)
+        cout<<arr[i]<<" ";
 }
 
 int main(){
-	int n;
-	cout<<"Enter size of array: ";
-	cin>>n;
+    cout<<"Enter size: ";
+    int n;
+    cin>>n;
 
-	cout<<"Enter array elements: ";
-	int arr[n];
-	int ctr=0;
-	int swap=0;
-	for(int i=0; i<n; i++)
-		cin>>arr[i];
+    cout<<"Enter array elements: ";
+    int arr[n];
+    for(int i=0; i<n; i++)
+        cin>>arr[i];
 
-	int start = 0, end = n-1;
-	while(start<end){
-		int m = minimum(arr,start,end, ctr);
-		//cout<<ctr<<endl;
-		if(start != m){
-			int temp = arr[start];
-			arr[start] = arr[m];
-			arr[m] = temp;
-			swap += 2;
-		}
-		start++;
-	}
+    int cmp = 0; // To count No. of comparision
+    int swp = 0; // To count No. of swap
 
-	cout<<"Sorted array: ";
-	for(int i=0; i<n; i++)
-		cout<<arr[i]<<" ";
-	cout<<endl;
+    selectionSort(arr,n, cmp, swp);
+    display(arr,n);
+    
+    cout<<"\nNumber of comparision: "<<cmp<<endl;
+    cout<<"Number of swap operation: "<<swp<<endl;
 
-	cout<<"Number of comparision: "<<ctr<<endl;
-	cout<<"Number of swap operation: "<<swap<<endl;
+    return 0;
 }
