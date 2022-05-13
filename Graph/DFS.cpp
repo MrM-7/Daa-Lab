@@ -1,9 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void addEdge(vector<int> adj[], int u, int v){
+void addEdge(vector<int> adj[], int u, int v, char ch){
     adj[u].push_back(v);
-    adj[v].push_back(u);
+    if(ch == 'U' || ch == 'u')
+        adj[v].push_back(u);
 }
 
 void dfs(vector<int> adj[], int s, int visited[]){
@@ -25,11 +26,16 @@ int main(){
     cin>>n;
     vector<int> adj[n];
     
+    cout<<"D : Directed graph\nU : Undirected graph\n";
+    cout<<"Enter: ";
+    char x;
+    cin>>x;
+    
     for(int i=0;;i++){
         cout<<"Enter edge: ";
         int u,v;
         cin>>u>>v;
-        addEdge(adj,u,v);
+        addEdge(adj,u,v,x);
         cout<<"Quit(Y/N): ";
         char ch;
         cin>>ch;
