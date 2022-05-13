@@ -1,4 +1,3 @@
-
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -20,15 +19,29 @@ void dfs(vector<int> adj[], int s, int visited[]){
 }
 
 int main(){
-    int n=5;
+    int n;
     
+    cout<<"Enter total no. of vertices: ";
+    cin>>n;
     vector<int> adj[n];
-    addEdge(adj,0,1);
-    addEdge(adj,0,2);
-    addEdge(adj,1,3);
-    addEdge(adj,2,4);
-    addEdge(adj,3,4);
+    
+    for(int i=0;;i++){
+        cout<<"Enter edge: ";
+        int u,v;
+        cin>>u>>v;
+        addEdge(adj,u,v);
+        cout<<"Quit(Y/N): ";
+        char ch;
+        cin>>ch;
+        if(ch=='Y'||ch=='y') break;
+    }
+    
+    
+    cout<<"Enter source vertex: ";
+    int src;
+    cin>>src;
     
     int visited[n]={0};
-    dfs(adj,0,visited);
+    cout<<"DFS: ";
+    dfs(adj,src,visited);
 }
